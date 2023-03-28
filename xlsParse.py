@@ -45,12 +45,12 @@ for j in [2, 5, 8, 11]:
             if day not in numerator:
                 numerator.update({day: [{"time": time, "lesson": ' '.join(df[j][i].split()), "place": ' '.join(str(df[j + 2][i]).split())}]})
             else:
-                numerator.update({day: [*numerator.get(day), {"time": time, "lesson": ' '.join(df[j][i].split()), "place": ' '.join(str(df[j + 2][i]).split())}]})
+                numerator.get(day).append({"time": time, "lesson": ' '.join(df[j][i].split()), "place": ' '.join(str(df[j + 2][i]).split())})
         if str(df[j][ind]) != 'nan':
             if day not in denominator:
                 denominator.update({day: [{"time": time, "lesson": ' '.join(df[j][ind].split()), "place": ' '.join(str(df[j + 2][place_ind if place_ind is not None else i + 1]).split())}]})
             else:
-                denominator.update({day: [*denominator.get(day), {"time": time, "lesson": ' '.join(df[j][ind].split()), "place": ' '.join(str(df[j + 2][place_ind if place_ind is not None else i + 1]).split())}]})
+                denominator.get(day).append({"time": time, "lesson": ' '.join(df[j][ind].split()), "place": ' '.join(str(df[j + 2][place_ind if place_ind is not None else i + 1]).split())})
 
     to_json.update({df[j][1]: {"numerator": [numerator], "denominator": [denominator]}})
 
